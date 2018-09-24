@@ -13,13 +13,17 @@ public class PlayerController : MonoBehaviour {
 
     private Rigidbody rb;
     private int count;
+    private int score;
+    private bool gameSet;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         count = 0;
+        score = 0;
         SetCountText();
         winText.text = "";
+        gameSet = false;
     }
     void FixedUpdate()
     {
@@ -35,17 +39,26 @@ public class PlayerController : MonoBehaviour {
         if (other.gameObject.CompareTag("Pick Up"))
         {
             other.gameObject.SetActive(false);
-            count = count + 1;
+            count++;
+            score++;
+            SetCountText();
+        }
+
+        if (other.gameObject.CompareTag("Pick up drop score"))
+        {
+            other.gameObject.SetActive(false);
+            score--;
             SetCountText();
         }
     }
 
     void SetCountText ()
     {
-        countText.text = "Count: " + count.ToString();
-        if(count >= 12)
+        countText.text = "Score: " + score.ToString() + "    Count: " + count.ToString();
+        if(count >= 12 && gameSet == false)
         {
-            winText.text = "You Win!";
+            winText.text = "You win! Your final score is " + score.ToString();
+            gameSet = true;
         }
     }
     void Update()
