@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Pick Up
   - Pick up drop score
+  - Bad Wall
   layers:
   - Default
   - TransparentFX

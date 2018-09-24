@@ -50,12 +50,24 @@ public class PlayerController : MonoBehaviour {
             score--;
             SetCountText();
         }
+
+        if (other.gameObject.CompareTag("Bad Wall"))
+        {
+            score--;
+            SetCountText();
+            transform.position = new Vector3(66.79998f, 0.5f, 8.0f);
+        }
     }
 
     void SetCountText ()
     {
         countText.text = "Score: " + score.ToString() + "    Count: " + count.ToString();
-        if(count >= 12 && gameSet == false)
+        if (count == 12)
+        {
+            transform.position = new Vector3(66.79998f, 0.5f, 8.0f);
+        }
+
+        if (count >= 24 && gameSet == false)
         {
             winText.text = "You win! Your final score is " + score.ToString();
             gameSet = true;
